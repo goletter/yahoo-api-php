@@ -1,0 +1,15 @@
+{
+    "name": "goletter/yahoo-api-php",
+    "authors": [
+        {
+            "name": "张勇",
+            "email": "goletter@outlook.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "autoload": {
+        "psr-4": { "Goletter\\YahooAPI\\" : "lib/" }
+    }
+}

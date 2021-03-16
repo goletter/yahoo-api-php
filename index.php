@@ -9,7 +9,7 @@ $provider = new Goletter\YahooAPI\YahooOAuth([
 ]);
 
 if (empty($_GET['code'])) {
-    $provider->authorize();
+    // $provider->authorize();
     exit;
 } else {
     $token = $provider->getAccessToken('authorization_code', [

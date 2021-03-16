@@ -1,9 +1,17 @@
 {
     "name": "goletter/yahoo-api-php",
+    "description": "",
+    "keywords": [
+        "api",
+        "yahoo-api",
+        "yahoo"
+    ],
+    "homepage": "http://www.goletter.cn",
+    "license": "MIT",
     "authors": [
         {
-            "name": "张勇",
-            "email": "goletter@outlook.com"
+            "name": "Goletter",
+            "homepage": "https://www.goletter.cn"
         }
     ],
     "require": {
@@ -11,5 +19,8 @@
     },
     "autoload": {
         "psr-4": { "Goletter\\YahooAPI\\" : "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Goletter\\YahooAPI\\" : "test/" }
     }
 }

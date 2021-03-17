@@ -2,20 +2,9 @@
 namespace Goletter\YahooAPI;
 
 use Goletter\YahooAPI\Helpers\AbstractProvider;
+use Psr\Http\Message\ResponseInterface;
 
 class YahooOAuth extends AbstractProvider {
-
-    public function getAccessToken($grant, array $options = [])
-    {
-        $params = [
-            'client_id'     => $this->clientId,
-            'client_secret' => $this->clientSecret,
-            'redirect_uri'  => $this->redirectUri,
-        ];
-
-        echo 'token';
-    }
-
     protected function getDefaultScopes()
     {
         return 'openid+profile';
@@ -24,5 +13,15 @@ class YahooOAuth extends AbstractProvider {
     public function getBaseAuthorizationUrl()
     {
         return 'https://auth.login.yahoo.co.jp/yconnect/v1/authorization';
+    }
+
+    public function getBaseAccessTokenUrl(array $params)
+    {
+        return 'https://auth.login.yahoo.co.jp/yconnect/v1/token';
+    }
+
+    protected function checkResponse(ResponseInterface $response, $data)
+    {
+        // TODO: Implement checkResponse() method.
     }
 }

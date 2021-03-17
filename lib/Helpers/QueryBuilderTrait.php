@@ -12,6 +12,6 @@ trait QueryBuilderTrait
      */
     protected function buildQueryString(array $params)
     {
-        return http_build_query($params, null, '&', \PHP_QUERY_RFC3986);
+        return urldecode(http_build_query($params));
     }
 }

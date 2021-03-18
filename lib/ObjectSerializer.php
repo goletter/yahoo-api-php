@@ -287,13 +287,11 @@ class ObjectSerializer
                 $propertySetter = $instance::setters()[$property];
 
                 if (!isset($propertySetter) || !isset($data->{$instance::attributeMap()[$property]})) {
-                    echo $type.'======='.$property.'=========='.$propertySetter.'<br />';
                     continue;
                 }
 
                 $propertyValue = $data->{$instance::attributeMap()[$property]};
                 if (isset($propertyValue)) {
-                    echo $type.'==========='.$property.'=========='.$propertySetter.'<br />';
                     $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
                 }
             }

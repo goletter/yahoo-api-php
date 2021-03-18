@@ -1,5 +1,4 @@
 <?php
-
 require_once './vendor/autoload.php';
 
 
@@ -10,9 +9,12 @@ $config->setDebug(true);
 $config->setCertPath('/cart/nimaso.crt');
 $config->setKeyPath('/cart/nimaso.key');
 
-$order_statuses = '';
+$sellerId = 'nimaso';
+$orderTimeFrom = 20210315000000;
+$orderTimeTo = 20210317000000;
 $apiInstance = new \Goletter\YahooAPI\Api\OrdersApi($config);
-$result = $apiInstance->getOrders($order_statuses);
+$result = $apiInstance->getOrders($sellerId, $orderTimeFrom, $orderTimeTo);
+print_r($result);exit;
 
 /*
 $options = [

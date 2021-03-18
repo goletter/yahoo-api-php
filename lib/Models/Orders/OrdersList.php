@@ -31,9 +31,7 @@ class OrdersList implements ModelInterface, ArrayAccess
      */
     protected static $swaggerTypes = [
         'orders' => '\Goletter\YahooAPI\Models\Orders\OrderList',
-        'next_token' => 'string',
-        'last_updated_before' => 'string',
-        'created_before' => 'string',
+        'total_count' => 'string',
     ];
 
     /**
@@ -43,9 +41,7 @@ class OrdersList implements ModelInterface, ArrayAccess
      */
     protected static $swaggerFormats = [
         'orders' => null,
-        'next_token' => null,
-        'last_updated_before' => null,
-        'created_before' => null,
+        'total_count' => null,
     ];
 
     /**
@@ -75,10 +71,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'orders' => 'Orders',
-        'next_token' => 'NextToken',
-        'last_updated_before' => 'LastUpdatedBefore',
-        'created_before' => 'CreatedBefore',
+        'orders' => 'OrderInfo',
+        'total_count' => 'TotalCount',
     ];
 
     /**
@@ -88,9 +82,7 @@ class OrdersList implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'orders' => 'setOrders',
-        'next_token' => 'setNextToken',
-        'last_updated_before' => 'setLastUpdatedBefore',
-        'created_before' => 'setCreatedBefore',
+        'total_count' => 'setTotalCount',
     ];
 
     /**
@@ -100,9 +92,7 @@ class OrdersList implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'orders' => 'getOrders',
-        'next_token' => 'getNextToken',
-        'last_updated_before' => 'getLastUpdatedBefore',
-        'created_before' => 'getCreatedBefore',
+        'total_count' => 'getTotalCount',
     ];
 
     /**
@@ -162,9 +152,7 @@ class OrdersList implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['orders'] = isset($data['orders']) ? $data['orders'] : null;
-        $this->container['next_token'] = isset($data['next_token']) ? $data['next_token'] : null;
-        $this->container['last_updated_before'] = isset($data['last_updated_before']) ? $data['last_updated_before'] : null;
-        $this->container['created_before'] = isset($data['created_before']) ? $data['created_before'] : null;
+        $this->container['total_count'] = isset($data['total_count']) ? $data['total_count'] : null;
     }
 
     /**
@@ -223,9 +211,9 @@ class OrdersList implements ModelInterface, ArrayAccess
      *
      * @return string
      */
-    public function getNextToken()
+    public function getTotalCount()
     {
-        return $this->container['next_token'];
+        return $this->container['total_count'];
     }
 
     /**
@@ -235,57 +223,9 @@ class OrdersList implements ModelInterface, ArrayAccess
      *
      * @return $this
      */
-    public function setNextToken($next_token)
+    public function setTotalCount($total_count)
     {
-        $this->container['next_token'] = $next_token;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_updated_before.
-     *
-     * @return string
-     */
-    public function getLastUpdatedBefore()
-    {
-        return $this->container['last_updated_before'];
-    }
-
-    /**
-     * Sets last_updated_before.
-     *
-     * @param string $last_updated_before A date used for selecting orders that were last updated before (or at) a specified time. An update is defined as any change in order status, including the creation of a new order. Includes updates made by Amazon and by the seller. All dates must be in ISO 8601 format.
-     *
-     * @return $this
-     */
-    public function setLastUpdatedBefore($last_updated_before)
-    {
-        $this->container['last_updated_before'] = $last_updated_before;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_before.
-     *
-     * @return string
-     */
-    public function getCreatedBefore()
-    {
-        return $this->container['created_before'];
-    }
-
-    /**
-     * Sets created_before.
-     *
-     * @param string $created_before A date used for selecting orders created before (or at) a specified time. Only orders placed before the specified time are returned. The date must be in ISO 8601 format.
-     *
-     * @return $this
-     */
-    public function setCreatedBefore($created_before)
-    {
-        $this->container['created_before'] = $created_before;
+        $this->container['total_count'] = $total_count;
 
         return $this;
     }

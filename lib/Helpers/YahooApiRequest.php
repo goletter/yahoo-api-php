@@ -115,12 +115,12 @@ trait YahooApiRequest
             } else {
                 $content = $responseBody->getContents();
                 if (!in_array($returnType, ['string', 'integer', 'bool'])) {
-                    $content = json_decode($content);
+                    libxml_disable_entity_loader(true);
+                    $content = json_decode(json_encode(simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
                 }
             }
 //            var_dump($content);
 //            exit();
-
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
@@ -157,7 +157,12 @@ trait YahooApiRequest
      */
     protected function createHttpClientOption(): array
     {
-        $options = [];
+        $options = [
+            'curl' => [
+                CURLOPT_SSLCERT => $this->config->getCertPath(),
+                CURLOPT_SSLKEY => $this->config->getKeyPath()
+            ]
+        ];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
             if (!$options[RequestOptions::DEBUG]) {

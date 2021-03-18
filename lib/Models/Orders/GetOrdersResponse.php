@@ -63,7 +63,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payload' => 'payload',
+        'payload' => 'Search',
         'errors' => 'errors',
     ];
 

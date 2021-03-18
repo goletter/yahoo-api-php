@@ -30,7 +30,7 @@ class Signature
         $accessToken
     ){
         $canonicalHeaders = [
-            'host' => $host,
+            // 'host' => $host,
         ];
 
         return array_merge($canonicalHeaders, [

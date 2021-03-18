@@ -116,7 +116,7 @@ trait YahooApiRequest
                 $content = $responseBody->getContents();
                 if (!in_array($returnType, ['string', 'integer', 'bool'])) {
                     libxml_disable_entity_loader(true);
-                    $content = json_decode(json_encode(simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
+                    $content = json_decode(json_encode(simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA)));
                 }
             }
 //            var_dump($content);

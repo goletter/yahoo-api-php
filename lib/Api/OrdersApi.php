@@ -107,7 +107,7 @@ class OrdersApi
                         <OrderTimeFrom>$orderTimeFrom</OrderTimeFrom>
                         <OrderTimeTo>$orderTimeTo</OrderTimeTo>
                    </Condition>
-                   <Field>OrderId,OrderTime,TotalPrice</Field>
+                   <Field>OrderId,Version,OriginalOrderId,ParentOrderId,OrderTime,OrderStatus,PayStatus,SettleStatus,PayType,TotalPrice</Field>
                    <Result>2000</Result>
               </Search>
           </Req>

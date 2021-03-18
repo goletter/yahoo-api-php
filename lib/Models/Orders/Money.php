@@ -4,16 +4,15 @@ namespace Goletter\YahooAPI\Models\Orders;
 use ArrayAccess;
 use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
-
 /**
- * OrdersList Class Doc Comment.
+ * Money Class Doc Comment.
  *
 
- * @description A list of orders along with additional information to make subsequent API calls.
+ * @description The monetary value of the order.
  *
  * @author   Stefan Neuhaus / ClouSale
  */
-class OrdersList implements ModelInterface, ArrayAccess
+class Money implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -22,7 +21,7 @@ class OrdersList implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'OrdersList';
+    protected static $swaggerModelName = 'Money';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -30,9 +29,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'orders' => '\Goletter\YahooAPI\Models\Orders\OrderList',
-        'total_count' => 'string',
-    ];
+        'currency_code' => 'string',
+        'amount' => 'string',    ];
 
     /**
      * Array of property to format mappings. Used for (de)serialization.
@@ -40,9 +38,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'orders' => null,
-        'total_count' => null,
-    ];
+        'currency_code' => null,
+        'amount' => null,    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -71,9 +68,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'orders' => 'OrderInfo',
-        'total_count' => 'TotalCount',
-    ];
+        'currency_code' => 'CurrencyCode',
+        'amount' => 'Amount',    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -81,9 +77,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'orders' => 'setOrders',
-        'total_count' => 'setTotalCount',
-    ];
+        'currency_code' => 'setCurrencyCode',
+        'amount' => 'setAmount',    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests).
@@ -91,9 +86,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'orders' => 'getOrders',
-        'total_count' => 'getTotalCount',
-    ];
+        'currency_code' => 'getCurrencyCode',
+        'amount' => 'getAmount',    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -151,8 +145,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['orders'] = isset($data['orders']) ? $data['orders'] : null;
-        $this->container['total_count'] = isset($data['total_count']) ? $data['total_count'] : null;
+        $this->container['currency_code'] = isset($data['currency_code']) ? $data['currency_code'] : null;
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
     }
 
     /**
@@ -163,10 +157,6 @@ class OrdersList implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (null === $this->container['orders']) {
-            $invalidProperties[] = "'orders' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -183,49 +173,49 @@ class OrdersList implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets orders.
+     * Gets currency_code.
      *
-     * @return \Goletter\YahooAPI\Models\Orders\OrderList
+     * @return string
      */
-    public function getOrders()
+    public function getCurrencyCode()
     {
-        return $this->container['orders'];
+        return $this->container['currency_code'];
     }
 
     /**
-     * Sets orders.
+     * Sets currency_code.
      *
-     * @param \Goletter\YahooAPI\Models\Orders\OrderList $orders orders
+     * @param string $currency_code The three-digit currency code. In ISO 4217 format.
      *
      * @return $this
      */
-    public function setOrders($orders)
+    public function setCurrencyCode($currency_code)
     {
-        $this->container['orders'] = $orders;
+        $this->container['currency_code'] = $currency_code;
 
         return $this;
     }
 
     /**
-     * Gets next_token.
+     * Gets amount.
      *
      * @return string
      */
-    public function getTotalCount()
+    public function getAmount()
     {
-        return $this->container['total_count'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets total_count.
+     * Sets amount.
      *
-     * @param string $next_token when present and not empty, pass this string token in the next request to return the next response page
+     * @param string $amount the currency amount
      *
      * @return $this
      */
-    public function setTotalCount($total_count)
+    public function setAmount($amount)
     {
-        $this->container['total_count'] = $total_count;
+        $this->container['amount'] = $amount;
 
         return $this;
     }

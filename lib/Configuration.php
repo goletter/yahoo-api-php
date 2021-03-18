@@ -29,7 +29,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://test.circus.shopping.yahooapis.jp/ShoppingWebService/V1';
+    protected $host = 'https://circus.shopping.yahooapis.jp/ShoppingWebService/V1';
 
     /**
      * Debug switch (default set to false).

@@ -14,7 +14,8 @@ $orderTimeFrom = 20210315000000;
 $orderTimeTo = 20210317000000;
 $apiInstance = new \Goletter\YahooAPI\Api\OrdersApi($config);
 $result = $apiInstance->getOrders($sellerId, $orderTimeFrom, $orderTimeTo);
-print_r($result);exit;
+$orders = $result->getPayload();
+print_r($orders);exit;
 
 /*
 $options = [

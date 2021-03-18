@@ -43,7 +43,6 @@ class OrdersApi
 
     public function getOrdersWithHttpInfo($order_statuses)
     {
-        $returnType = '\Goletter\YahooAPI\Models\Orders\GetOrdersResponse';
         $request = $this->getOrdersRequest($order_statuses);
 
         return $this->sendRequest($request, GetOrdersResponse::class);

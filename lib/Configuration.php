@@ -29,7 +29,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://circus.shopping.yahooapis.jp/ShoppingWebService/V1';
+    protected $host = 'https://test.circus.shopping.yahooapis.jp/ShoppingWebService/V1';
 
     /**
      * Debug switch (default set to false).
@@ -167,5 +167,29 @@ class Configuration
     public function getDebug()
     {
         return $this->debug;
+    }
+
+    /**
+     * Sets the debug file.
+     *
+     * @param string $debugFile Debug file
+     *
+     * @return $this
+     */
+    public function setDebugFile($debugFile)
+    {
+        $this->debugFile = $debugFile;
+
+        return $this;
+    }
+
+    /**
+     * Gets the debug file.
+     *
+     * @return string
+     */
+    public function getDebugFile()
+    {
+        return $this->debugFile;
     }
 }

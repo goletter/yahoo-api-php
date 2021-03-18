@@ -32,11 +32,11 @@ trait YahooApiRequest
         $_tempBody = $httpBody;
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
+                ['application/xml']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
+                ['application/xml'],
                 []
             );
         }
@@ -45,7 +45,7 @@ trait YahooApiRequest
             // $_tempBody is the method argument, if present
             $httpBody = $_tempBody;
             // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && 'application/json' === $headers['Content-Type']) {
+            if ($httpBody instanceof \stdClass && 'application/xml' === $headers['Content-Type']) {
                 $httpBody = Utils::jsonEncode($httpBody);
             }
         } elseif (count($formParams) > 0) {
@@ -59,13 +59,14 @@ trait YahooApiRequest
                 }
                 // for HTTP post (form)
                 $httpBody = new MultipartStream($multipartContents);
-            } elseif ('application/json' === $headers['Content-Type']) {
+            } elseif ('application/xml' === $headers['Content-Type']) {
                 $httpBody = Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = Query::build($formParams);
             }
         }
+
         $query = Query::build($queryParams);
         $YahooHeader = Signature::calculateSignature(
             $this->config,
@@ -95,7 +96,6 @@ trait YahooApiRequest
      */
     private function sendRequest(Request $request, string $returnType): array
     {
-        print_r($request);exit;
         try {
             $options = $this->createHttpClientOption();
             try {

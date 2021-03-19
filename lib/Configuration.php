@@ -102,7 +102,7 @@ class Configuration
      */
     public function getRedirectUri()
     {
-        return $this->accessToken;
+        return $this->redirectUri;
     }
 
     /**

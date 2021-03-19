@@ -27,6 +27,9 @@ require_once './vendor/autoload.php';
 
 $accessToken = '';
 $config = \Goletter\YahooAPI\Configuration::getDefaultConfiguration();
+$config->setClientId('xxxx');
+$config->setClientSecret('xxxx');
+$config->setRedirectUri('http://www.xxx.com');
 $config->setAccessToken($accessToken);
 $config->setSellerId('nimaso');
 $config->setCertPath('/cart/nimaso.crt');

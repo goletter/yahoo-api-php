@@ -24,6 +24,11 @@ class Configuration
     protected $host = 'https://circus.shopping.yahooapis.jp/ShoppingWebService/V1';
 
     /**
+     * @var string
+     */
+    protected $redirectUri = '';
+
+    /**
      * Debug switch (default set to false).
      *
      * @var bool
@@ -39,6 +44,10 @@ class Configuration
 
     /** @var string|null */
     protected $certPath;
+    /** @var string|null */
+    protected $clientId;
+    /** @var string|null */
+    protected $clientSecret;
     /** @var string|null */
     protected $keyPath;
     /** @var string|null */
@@ -76,6 +85,22 @@ class Configuration
      * @return string Access token for OAuth
      */
     public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * @param $redirectUri
+     */
+    public function setRedirectUri($redirectUri)
+    {
+        $this->redirectUri = $redirectUri;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRedirectUri()
     {
         return $this->accessToken;
     }
@@ -135,6 +160,44 @@ class Configuration
     public function getKeyPath()
     {
         return $this->keyPath;
+    }
+
+    /**
+     * @param $clientId
+     * @return $this
+     */
+    public function setClientId($clientId)
+    {
+        $this->clientId = $clientId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getClientId()
+    {
+        return $this->clientId;
+    }
+
+    /**
+     * @param $clientSecret
+     * @return $this
+     */
+    public function setClientSecret($clientSecret)
+    {
+        $this->clientSecret = $clientSecret;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getClientSecret()
+    {
+        return $this->clientSecret;
     }
 
     /**

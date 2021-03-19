@@ -2,20 +2,40 @@
 namespace Goletter\YahooAPI;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
+/**
+ * Class YahooOAuth
+ * @package Goletter\YahooAPI
+ */
 class YahooOAuth {
+
     /**
-     * @param $clientId
-     * @param $redirectUri
+     * @var ClientInterface
+     */
+    protected $client;
+
+    /**
+     * @var Configuration
+     */
+    protected $config;
+
+    public function __construct(Configuration $config)
+    {
+        $this->client = new Client();
+        $this->config = $config;
+    }
+
+    /**
      * @throws \Exception
      */
-    public function getAuthorizationUrl($clientId, $redirectUri)
+    public function getAuthorizationUrl()
     {
         $state = bin2hex(random_bytes(32 / 2));
         $params = [
             'response_type' => 'code',
-            'client_id' => $clientId,
-            'redirect_uri' => $redirectUri,
+            'client_id' => $this->config->getClientId(),
+            'redirect_uri' => $this->config->getRedirectUri(),
             'scope' => 'openid+profile',
             'bail' => 1,
             'state' => $state
@@ -28,59 +48,59 @@ class YahooOAuth {
     }
 
     /**
-     * @param $clientId
-     * @param $clientSecret
      * @param $code
-     * @param $redirectUri
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getAccessToken($clientId, $clientSecret, $code, $redirectUri)
+    public function getAccessToken($code)
     {
-        $client = new Client();
-        $params = [
-            'grant_type' => 'authorization_code',
-            'client_id' => $clientId,
-            'client_secret' => $clientSecret,
-            'code' => $code,
-            'redirect_uri' => $redirectUri,
-        ];
-        $options = array_merge([
+        $options = [
             'headers' => [
-                'Authorization' => 'Basic ' . base64_encode($clientId . ':' . $clientSecret)
+                'Authorization' => 'Basic ' . base64_encode($this->config->getClientId() . ':' . $this->config->getClientSecret())
             ],
-        ], $params);
-        $response = $client->request('POST', 'https://auth.login.yahoo.co.jp/yconnect/v1/token', $options);
-        $body = $response->getBody()->getContents();
+            'form_params' => [
+                'grant_type' => 'authorization_code',
+                'code' => $code,
+                'redirect_uri' => $this->config->getRedirectUri(),
+            ],
+            'curl' => [
+                CURLOPT_SSLCERT => $this->config->getCertPath(),
+                CURLOPT_SSLKEY => $this->config->getKeyPath()
+            ]
+        ];
+        $response = $this->client->request('POST', 'https://auth.login.yahoo.co.jp/yconnect/v1/token', $options);
+        $body = $response->getBody();
         $bodyAsJson = json_decode($body, true);
         if (isset($bodyAsJson['error_description'])) {
             // throw new YahooOAuthException($bodyAsJson['error_description'], $bodyAsJson['error']);
         }
 
-        return $bodyAsJson['refresh_token'];
+        return $bodyAsJson;
     }
 
     /**
-     * @param $clientId
-     * @param $clientSecret
+     * @param $refreshToken
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getRefreshToken($clientId, $clientSecret)
+    public function getRefreshToken($refreshToken)
     {
         $client = new Client();
-        $params = [
-            'grant_type' => 'refresh_token',
-            'client_id' => $clientId,
-            'client_secret' => $clientSecret,
-        ];
-        $options = array_merge([
+        $options = [
             'headers' => [
-                'Authorization' => 'Basic ' . base64_encode($clientId . ':' . $clientSecret)
+                'Authorization' => 'Basic ' . base64_encode($this->config->getClientId() . ':' . $this->config->getClientSecret()),
             ],
-        ], $params);
+            'form_params' => [
+                'grant_type' => 'refresh_token',
+                'refresh_token' => $refreshToken,
+            ],
+            'curl' => [
+                CURLOPT_SSLCERT => $this->config->getCertPath(),
+                CURLOPT_SSLKEY => $this->config->getKeyPath()
+            ]
+        ];
         $response = $client->request('POST', 'https://auth.login.yahoo.co.jp/yconnect/v1/token', $options);
-        $body = $response->getBody()->getContents();
+        $body = $response->getBody();
 
         $bodyAsJson = json_decode($body, true);
         if (isset($bodyAsJson['error_description'])) {

@@ -30,8 +30,8 @@ class OrdersList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'orders' => '\Goletter\YahooAPI\Models\Orders\OrderList',
-        'total_count' => 'string',
+        'orders' => '\Goletter\YahooAPI\Models\Orders\Order',
+        'total_count' => 'int',
     ];
 
     /**

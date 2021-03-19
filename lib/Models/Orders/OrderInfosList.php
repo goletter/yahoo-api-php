@@ -6,14 +6,14 @@ use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
 
 /**
- * GetOrdersResponse Class Doc Comment.
+ * OrdersList Class Doc Comment.
  *
 
- * @description The response schema for the getOrders operation.
+ * @description A list of orders along with additional information to make subsequent API calls.
  *
- * @author   Stefan Neuhaus / Yahoo
+ * @author   Stefan Neuhaus / ClouSale
  */
-class GetOrdersResponse implements ModelInterface, ArrayAccess
+class OrderInfosList implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -22,7 +22,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'GetOrdersResponse';
+    protected static $swaggerModelName = 'OrderInfosList';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -30,8 +30,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'payload' => '\Goletter\YahooAPI\Models\Orders\OrdersList',
-        'errors' => '\Goletter\YahooAPI\Models\Orders\ErrorList',
+        'order_info' => '\Goletter\YahooAPI\Models\Orders\OrderInfoList',
     ];
 
     /**
@@ -40,8 +39,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'payload' => null,
-        'errors' => null,
+        'order_info' => null,
     ];
 
     /**
@@ -71,8 +69,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payload' => 'Search',
-        'errors' => 'errors',
+        'order_info' => 'OrderInfo',
     ];
 
     /**
@@ -81,8 +78,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'payload' => 'setPayload',
-        'errors' => 'setErrors',
+        'order_info' => 'setOrderInfo',
     ];
 
     /**
@@ -91,8 +87,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'payload' => 'getPayload',
-        'errors' => 'getErrors',
+        'order_info' => 'getOrderInfo',
     ];
 
     /**
@@ -105,7 +100,6 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     {
         return self::$attributeMap;
     }
-
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -152,8 +146,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['payload'] = isset($data['payload']) ? $data['payload'] : null;
-        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
+        $this->container['order_info'] = isset($data['order_info']) ? $data['order_info'] : null;
     }
 
     /**
@@ -180,49 +173,25 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets payload.
+     * Gets orders.
      *
-     * @return \Goletter\YahooAPI\Models\Orders\OrdersList
+     * @return \Goletter\YahooAPI\Models\Orders\OrderList
      */
-    public function getPayload()
+    public function getOrderInfo()
     {
-        return $this->container['payload'];
+        return $this->container['order_info'];
     }
 
     /**
-     * Sets payload.
+     * Sets orders.
      *
-     * @param \Goletter\YahooAPI\Models\Orders\OrdersList $payload payload
+     * @param \Goletter\YahooAPI\Models\Orders\OrderList $orders orders
      *
      * @return $this
      */
-    public function setPayload($payload)
+    public function setOrderInfo($orderInfo)
     {
-        $this->container['payload'] = $payload;
-
-        return $this;
-    }
-
-    /**
-     * Gets errors.
-     *
-     * @return \Goletter\YahooAPI\Models\Orders\ErrorList
-     */
-    public function getErrors()
-    {
-        return $this->container['errors'];
-    }
-
-    /**
-     * Sets errors.
-     *
-     * @param \Goletter\YahooAPI\Models\Orders\ErrorList $errors errors
-     *
-     * @return $this
-     */
-    public function setErrors($errors)
-    {
-        $this->container['errors'] = $errors;
+        $this->container['order_info'] = $orderInfo;
 
         return $this;
     }

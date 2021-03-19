@@ -11,6 +11,10 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Utils;
 
+/**
+ * Trait YahooApiRequest
+ * @package Goletter\YahooAPI\Helpers
+ */
 trait YahooApiRequest
 {
     private function generateRequest(
@@ -119,8 +123,8 @@ trait YahooApiRequest
                     $content = json_decode(json_encode(simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA)));
                 }
             }
-//            var_dump($content);
-//            exit();
+            // var_dump($content);
+            // exit();
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),

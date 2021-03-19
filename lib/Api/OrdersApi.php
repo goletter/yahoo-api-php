@@ -6,6 +6,7 @@ use Goletter\YahooAPI\Configuration;
 use Goletter\YahooAPI\HeaderSelector;
 use Goletter\YahooAPI\Helpers\YahooApiRequest;
 use Goletter\YahooAPI\Models\Orders\GetOrdersResponse;
+use Goletter\YahooAPI\Models\Orders\GetOrderResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
@@ -40,42 +41,48 @@ class OrdersApi
     }
 
     /**
-     * @param $sellerId
+     * @return Configuration
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
      * @param $orderTimeFrom
      * @param $orderTimeTo
      * @return mixed
      * @throws \Goletter\YahooAPI\ApiException
      */
-    public function getOrders($sellerId, $orderTimeFrom, $orderTimeTo)
+    public function getOrders($orderTimeFrom, $orderTimeTo)
     {
-        list($response) = $this->getOrdersWithHttpInfo($sellerId, $orderTimeFrom, $orderTimeTo);
+        list($response) = $this->getOrdersWithHttpInfo($orderTimeFrom, $orderTimeTo);
 
         return $response;
     }
 
     /**
-     * @param $sellerId
      * @param $orderTimeFrom
      * @param $orderTimeTo
      * @return array
      * @throws \Goletter\YahooAPI\ApiException
      */
-    public function getOrdersWithHttpInfo($sellerId, $orderTimeFrom, $orderTimeTo)
+    public function getOrdersWithHttpInfo($orderTimeFrom, $orderTimeTo)
     {
-        $request = $this->getOrdersRequest($sellerId, $orderTimeFrom, $orderTimeTo);
+        $request = $this->getOrdersRequest($orderTimeFrom, $orderTimeTo);
 
         return $this->sendRequest($request, GetOrdersResponse::class);
     }
 
     /**
-     * @param $sellerId
      * @param $orderTimeFrom
      * @param $orderTimeTo
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getOrdersRequest($sellerId, $orderTimeFrom, $orderTimeTo)
+    protected function getOrdersRequest($orderTimeFrom, $orderTimeTo)
     {
         // verify the required parameter 'sellerId' is set
+        $sellerId = $this->config->getSellerId();
         if (null === $sellerId) {
             throw new \InvalidArgumentException('Missing the required parameter $sellerId when calling getOrders');
         }
@@ -112,6 +119,64 @@ class OrdersApi
               </Search>
           </Req>
         EOD;
+
+        return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
+    }
+
+    /**
+     * @param $order_id
+     * @return mixed
+     */
+    public function getOrder($order_id)
+    {
+        list($response) = $this->getOrderWithHttpInfo($order_id);
+
+        return $response;
+    }
+
+    /**
+     * @param $order_id
+     * @return array
+     * @throws \Goletter\YahooAPI\ApiException
+     */
+    public function getOrderWithHttpInfo($order_id)
+    {
+        $request = $this->getOrderRequest($order_id);
+
+        return $this->sendRequest($request, GetOrderResponse::class);
+    }
+
+    /**
+     * @param $order_id
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getOrderRequest($order_id)
+    {
+        $sellerId = $this->config->getSellerId();
+        if (null === $sellerId) {
+            throw new \InvalidArgumentException('Missing the required parameter $sellerId when calling getOrders');
+        }
+
+        // verify the required parameter 'order_id' is set
+        if (null === $order_id || (is_array($order_id) && 0 === count($order_id))) {
+            throw new \InvalidArgumentException('Missing the required parameter $order_id when calling getOrder');
+        }
+
+        $resourcePath = '/orderInfo';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $multipart = false;
+
+        $httpBody = <<<BODY
+            <Req>
+                <SellerId>$sellerId</SellerId>
+                <Target>
+                    <OrderId>$order_id</OrderId>
+                    <Field>OrderId,ItemId,Title,SubCode,UnitPrice,Quantity,ShipZipCode,ShipFirstName,ShipLastName,ShipPrefecture,ShipCity,ShipAddress1,ShipAddress2,ShipPhoneNumber</Field>
+                </Target>
+            </Req>
+            BODY;
 
         return $this->generateRequest($multipart, $formParams, $queryParams, $resourcePath, $headerParams, 'POST', $httpBody);
     }

@@ -4,16 +4,15 @@ namespace Goletter\YahooAPI\Models\Orders;
 use ArrayAccess;
 use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
-
 /**
- * GetOrdersResponse Class Doc Comment.
+ * OrderItem Class Doc Comment.
  *
 
- * @description The response schema for the getOrders operation.
+ * @description A list of orders.
  *
- * @author   Stefan Neuhaus / Yahoo
+ * @author   Stefan Neuhaus / ClouSale
  */
-class GetOrdersResponse implements ModelInterface, ArrayAccess
+class OrderItemList implements ModelInterface, ArrayAccess, IterableType
 {
     const DISCRIMINATOR = null;
 
@@ -22,27 +21,21 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'GetOrdersResponse';
+    protected static $swaggerModelName = 'OrderItemsList';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
      *
      * @var string[]
      */
-    protected static $swaggerTypes = [
-        'payload' => '\Goletter\YahooAPI\Models\Orders\OrdersList',
-        'errors' => '\Goletter\YahooAPI\Models\Orders\ErrorList',
-    ];
+    protected static $swaggerTypes = [];
 
     /**
      * Array of property to format mappings. Used for (de)serialization.
      *
      * @var string[]
      */
-    protected static $swaggerFormats = [
-        'payload' => null,
-        'errors' => null,
-    ];
+    protected static $swaggerFormats = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,30 +63,21 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      *
      * @var string[]
      */
-    protected static $attributeMap = [
-        'payload' => 'Search',
-        'errors' => 'errors',
-    ];
+    protected static $attributeMap = [];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
-    protected static $setters = [
-        'payload' => 'setPayload',
-        'errors' => 'setErrors',
-    ];
+    protected static $setters = [];
 
     /**
      * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
-    protected static $getters = [
-        'payload' => 'getPayload',
-        'errors' => 'getErrors',
-    ];
+    protected static $getters = [];
 
     /**
      * Array of attributes where the key is the local name,
@@ -105,7 +89,6 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     {
         return self::$attributeMap;
     }
-
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -152,8 +135,6 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['payload'] = isset($data['payload']) ? $data['payload'] : null;
-        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -177,54 +158,6 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets payload.
-     *
-     * @return \Goletter\YahooAPI\Models\Orders\OrdersList
-     */
-    public function getPayload()
-    {
-        return $this->container['payload'];
-    }
-
-    /**
-     * Sets payload.
-     *
-     * @param \Goletter\YahooAPI\Models\Orders\OrdersList $payload payload
-     *
-     * @return $this
-     */
-    public function setPayload($payload)
-    {
-        $this->container['payload'] = $payload;
-
-        return $this;
-    }
-
-    /**
-     * Gets errors.
-     *
-     * @return \Goletter\YahooAPI\Models\Orders\ErrorList
-     */
-    public function getErrors()
-    {
-        return $this->container['errors'];
-    }
-
-    /**
-     * Sets errors.
-     *
-     * @param \Goletter\YahooAPI\Models\Orders\ErrorList $errors errors
-     *
-     * @return $this
-     */
-    public function setErrors($errors)
-    {
-        $this->container['errors'] = $errors;
-
-        return $this;
     }
 
     /**
@@ -295,5 +228,10 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
         }
 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
+    }
+
+    public function getSubClass()
+    {
+        return OrderItem::class;
     }
 }

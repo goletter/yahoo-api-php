@@ -4,15 +4,8 @@ namespace Goletter\YahooAPI\Models\Orders;
 use ArrayAccess;
 use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
-/**
- * Money Class Doc Comment.
- *
 
- * @description The monetary value of the order.
- *
- * @author   Stefan Neuhaus / ClouSale
- */
-class Money implements ModelInterface, ArrayAccess
+class OrderInfoList implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -21,7 +14,7 @@ class Money implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'Money';
+    protected static $swaggerModelName = 'OrderInfo';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -29,8 +22,10 @@ class Money implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'currency_code' => 'string',
-        'amount' => 'string',    ];
+        'order_id' => 'string',
+        'ship' => '\Goletter\YahooAPI\Models\Orders\OrderShip',
+        'item' => '\Goletter\YahooAPI\Models\Orders\OrderItem',
+    ];
 
     /**
      * Array of property to format mappings. Used for (de)serialization.
@@ -38,8 +33,10 @@ class Money implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'currency_code' => null,
-        'amount' => null,    ];
+        'order_id' => null,
+        'ship' => null,
+        'item' => null,
+    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -68,8 +65,10 @@ class Money implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'currency_code' => 'CurrencyCode',
-        'amount' => 'Amount',    ];
+        'order_id' => 'OrderId',
+        'ship' => 'Ship',
+        'item' => 'Item',
+    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -77,8 +76,10 @@ class Money implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'currency_code' => 'setCurrencyCode',
-        'amount' => 'setAmount',    ];
+        'order_id' => 'setOrderId',
+        'ship' => 'setShip',
+        'item' => 'setItem',
+    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests).
@@ -86,8 +87,10 @@ class Money implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'currency_code' => 'getCurrencyCode',
-        'amount' => 'getAmount',    ];
+        'order_id' => 'getOrderId',
+        'ship' => 'getShip',
+        'item' => 'getItem',
+    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -145,8 +148,9 @@ class Money implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['currency_code'] = isset($data['currency_code']) ? $data['currency_code'] : null;
-        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
+        $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
+        $this->container['ship'] = isset($data['ship']) ? $data['ship'] : null;
+        $this->container['item'] = isset($data['item']) ? $data['item'] : null;
     }
 
     /**
@@ -173,49 +177,63 @@ class Money implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets currency_code.
+     * Gets order_id.
      *
      * @return string
      */
-    public function getCurrencyCode()
+    public function getOrderId()
     {
-        return $this->container['currency_code'];
+        return $this->container['order_id'];
     }
 
     /**
-     * Sets currency_code.
+     * Sets order_id.
      *
-     * @param string $currency_code The three-digit currency code. In ISO 4217 format.
+     * @param string $order_id an order identifier, in 3-7-7 format
      *
      * @return $this
      */
-    public function setCurrencyCode($currency_code)
+    public function setOrderId($order_id)
     {
-        $this->container['currency_code'] = $currency_code;
+        $this->container['order_id'] = $order_id;
 
         return $this;
     }
 
     /**
-     * Gets amount.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getAmount()
+    public function getShip()
     {
-        return $this->container['amount'];
+        return $this->container['ship'];
     }
 
     /**
-     * Sets amount.
-     *
-     * @param string $amount the currency amount
-     *
+     * @param $ship
      * @return $this
      */
-    public function setAmount($amount)
+    public function setShip($ship)
     {
-        $this->container['amount'] = $amount;
+        $this->container['ship'] = $ship;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getItem()
+    {
+        return $this->container['item'];
+    }
+
+    /**
+     * @param $ship
+     * @return $this
+     */
+    public function setItem($item)
+    {
+        $this->container['item'] = $item;
 
         return $this;
     }

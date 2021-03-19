@@ -5,15 +5,7 @@ use ArrayAccess;
 use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
 
-/**
- * GetOrdersResponse Class Doc Comment.
- *
-
- * @description The response schema for the getOrders operation.
- *
- * @author   Stefan Neuhaus / Yahoo
- */
-class GetOrdersResponse implements ModelInterface, ArrayAccess
+class GetOrderResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -22,7 +14,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'GetOrdersResponse';
+    protected static $swaggerModelName = 'GetOrderResponse';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -30,7 +22,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'payload' => '\Goletter\YahooAPI\Models\Orders\OrdersList',
+        'payload' => '\Goletter\YahooAPI\Models\Orders\OrderInfosList',
         'errors' => '\Goletter\YahooAPI\Models\Orders\ErrorList',
     ];
 
@@ -71,7 +63,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payload' => 'Search',
+        'payload' => 'Result',
         'errors' => 'errors',
     ];
 

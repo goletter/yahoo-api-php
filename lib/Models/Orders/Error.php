@@ -5,15 +5,7 @@ use ArrayAccess;
 use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
 
-/**
- * GetOrdersResponse Class Doc Comment.
- *
-
- * @description The response schema for the getOrders operation.
- *
- * @author   Stefan Neuhaus / Yahoo
- */
-class GetOrdersResponse implements ModelInterface, ArrayAccess
+class Error implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -22,7 +14,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'GetOrdersResponse';
+    protected static $swaggerModelName = 'Error';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -30,9 +22,9 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'payload' => '\Goletter\YahooAPI\Models\Orders\OrdersList',
-        'errors' => '\Goletter\YahooAPI\Models\Orders\ErrorList',
-    ];
+        'code' => 'string',
+        'message' => 'string',
+        'details' => 'string',    ];
 
     /**
      * Array of property to format mappings. Used for (de)serialization.
@@ -40,9 +32,9 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'payload' => null,
-        'errors' => null,
-    ];
+        'code' => null,
+        'message' => null,
+        'details' => null,    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -71,9 +63,9 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payload' => 'Search',
-        'errors' => 'errors',
-    ];
+        'code' => 'code',
+        'message' => 'message',
+        'details' => 'details',    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -81,9 +73,9 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'payload' => 'setPayload',
-        'errors' => 'setErrors',
-    ];
+        'code' => 'setCode',
+        'message' => 'setMessage',
+        'details' => 'setDetails',    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests).
@@ -91,9 +83,9 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'payload' => 'getPayload',
-        'errors' => 'getErrors',
-    ];
+        'code' => 'getCode',
+        'message' => 'getMessage',
+        'details' => 'getDetails',    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -105,7 +97,6 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     {
         return self::$attributeMap;
     }
-
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -152,8 +143,9 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['payload'] = isset($data['payload']) ? $data['payload'] : null;
-        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
+        $this->container['code'] = isset($data['code']) ? $data['code'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['details'] = isset($data['details']) ? $data['details'] : null;
     }
 
     /**
@@ -164,6 +156,13 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (null === $this->container['code']) {
+            $invalidProperties[] = "'code' can't be null";
+        }
+        if (null === $this->container['message']) {
+            $invalidProperties[] = "'message' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -180,49 +179,73 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets payload.
+     * Gets code.
      *
-     * @return \Goletter\YahooAPI\Models\Orders\OrdersList
+     * @return string
      */
-    public function getPayload()
+    public function getCode()
     {
-        return $this->container['payload'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets payload.
+     * Sets code.
      *
-     * @param \Goletter\YahooAPI\Models\Orders\OrdersList $payload payload
+     * @param string $code an error code that identifies the type of error that occurred
      *
      * @return $this
      */
-    public function setPayload($payload)
+    public function setCode($code)
     {
-        $this->container['payload'] = $payload;
+        $this->container['code'] = $code;
 
         return $this;
     }
 
     /**
-     * Gets errors.
+     * Gets message.
      *
-     * @return \Goletter\YahooAPI\Models\Orders\ErrorList
+     * @return string
      */
-    public function getErrors()
+    public function getMessage()
     {
-        return $this->container['errors'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets errors.
+     * Sets message.
      *
-     * @param \Goletter\YahooAPI\Models\Orders\ErrorList $errors errors
+     * @param string $message a message that describes the error condition in a human-readable form
      *
      * @return $this
      */
-    public function setErrors($errors)
+    public function setMessage($message)
     {
-        $this->container['errors'] = $errors;
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets details.
+     *
+     * @return string
+     */
+    public function getDetails()
+    {
+        return $this->container['details'];
+    }
+
+    /**
+     * Sets details.
+     *
+     * @param string $details additional details that can help the caller understand or fix the issue
+     *
+     * @return $this
+     */
+    public function setDetails($details)
+    {
+        $this->container['details'] = $details;
 
         return $this;
     }

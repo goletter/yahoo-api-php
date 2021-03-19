@@ -4,8 +4,15 @@ namespace Goletter\YahooAPI\Models\Orders;
 use ArrayAccess;
 use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
+/**
+ * OrderShip Class Doc Comment.
+ *
 
-class Order implements ModelInterface, ArrayAccess
+ * @description A list of orders.
+ *
+ * @author   Stefan Neuhaus / ClouSale
+ */
+class OrderShip implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -14,7 +21,7 @@ class Order implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'Order';
+    protected static $swaggerModelName = 'OrderShip';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,16 +29,14 @@ class Order implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'order_id' => 'string',
-        'version' => 'int',
-        // 'original_order_id' => 'string',
-        // 'parent_order_id' => 'string',
-        'order_time' => 'string',
-        'order_status' => 'int',
-        'pay_status' => 'int',
-        'settle_status' => 'int',
-        'pay_type' => 'int',
-        'total_price' => 'string',
+        'ship_first_name' => 'string',
+        'ship_last_name' => 'string',
+        'ship_zip_code' => 'string',
+        'ship_prefecture' => 'string',
+        'ship_city' => 'string',
+        'ship_address1' => 'string',
+        // 'ship_address2' => 'string',
+        'ship_phone_number' => 'string',
     ];
 
     /**
@@ -40,16 +45,14 @@ class Order implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'order_id' => null,
-        'version' => null,
-        'original_order_id' => null,
-        'parent_order_id' => null,
-        'order_time' => null,
-        'order_status' => null,
-        'pay_status' => null,
-        'settle_status' => null,
-        'pay_type' => null,
-        'total_price' => null,
+        'ship_first_name' => null,
+        'ship_last_name' => null,
+        'ship_zip_code' => null,
+        'ship_prefecture' => null,
+        'ship_city' => null,
+        'ship_address1' => null,
+        'ship_address2' => null,
+        'ship_phone_number' => null,
     ];
 
     /**
@@ -79,16 +82,14 @@ class Order implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'order_id' => 'OrderId',
-        'version' => 'Version',
-        'original_order_id' => 'OriginalOrderId',
-        'parent_order_id' => 'ParentOrderId',
-        'order_time' => 'OrderTime',
-        'order_status' => 'OrderStatus',
-        'pay_status' => 'PayStatus',
-        'settle_status' => 'SettleStatus',
-        'pay_type' => 'PayType',
-        'total_price' => 'TotalPrice',
+        'ship_first_name' => 'ShipFirstName',
+        'ship_last_name' => 'ShipLastName',
+        'ship_zip_code' => 'ShipZipCode',
+        'ship_prefecture' => 'ShipPrefecture',
+        'ship_city' => 'ShipCity',
+        'ship_address1' => 'ShipAddress1',
+        'ship_address2' => 'ShipAddress2',
+        'ship_phone_number' => 'ShipPhoneNumber',
     ];
 
     /**
@@ -97,16 +98,14 @@ class Order implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'order_id' => 'setOrderId',
-        'version' => 'setVersion',
-        'original_order_id' => 'setOriginalOrderId',
-        'parent_order_id' => 'setParentOrderId',
-        'order_time' => 'setOrderTime',
-        'order_status' => 'setOrderStatus',
-        'pay_status' => 'setPayStatus',
-        'settle_status' => 'setSettleStatus',
-        'pay_type' => 'setPayType',
-        'total_price' => 'setTotalPrice',
+        'ship_first_name' => 'setShipFirstName',
+        'ship_last_name' => 'setShipLastName',
+        'ship_zip_code' => 'setShipZipCode',
+        'ship_prefecture' => 'setShipPrefecture',
+        'ship_city' => 'setShipCity',
+        'ship_address1' => 'setShipAddress1',
+        'ship_address2' => 'setShipAddress2',
+        'ship_phone_number' => 'setShipPhoneNumber',
     ];
 
     /**
@@ -115,16 +114,14 @@ class Order implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'order_id' => 'getOrderId',
-        'version' => 'getVersion',
-        'original_order_id' => 'getOriginalOrderId',
-        'parent_order_id' => 'getParentOrderId',
-        'order_time' => 'getOrderTime',
-        'order_status' => 'getOrderStatus',
-        'pay_status' => 'getPayStatus',
-        'settle_status' => 'getSettleStatus',
-        'pay_type' => 'getPayType',
-        'total_price' => 'getTotalPrice',
+        'ship_first_name' => 'getShipFirstName',
+        'ship_last_name' => 'getShipLastName',
+        'ship_zip_code' => 'getShipZipCode',
+        'ship_prefecture' => 'getShipPrefecture',
+        'ship_city' => 'getShipCity',
+        'ship_address1' => 'getShipAddress1',
+        'ship_address2' => 'getShipAddress2',
+        'ship_phone_number' => 'getShipPhoneNumber',
     ];
 
     /**
@@ -183,16 +180,14 @@ class Order implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
-        $this->container['original_order_id'] = isset($data['original_order_id']) ? $data['original_order_id'] : null;
-        $this->container['parent_order_id'] = isset($data['parent_order_id']) ? $data['parent_order_id'] : null;
-        $this->container['order_time'] = isset($data['order_time']) ? $data['order_time'] : null;
-        $this->container['order_status'] = isset($data['order_status']) ? $data['order_status'] : null;
-        $this->container['pay_status'] = isset($data['pay_status']) ? $data['pay_status'] : null;
-        $this->container['settle_status'] = isset($data['settle_status']) ? $data['settle_status'] : null;
-        $this->container['pay_type'] = isset($data['pay_type']) ? $data['pay_type'] : null;
-        $this->container['total_price'] = isset($data['total_price']) ? $data['total_price'] : null;
+        $this->container['ship_first_name'] = isset($data['ship_first_name']) ? $data['ship_first_name'] : null;
+        $this->container['ship_last_name'] = isset($data['ship_last_name']) ? $data['ship_last_name'] : null;
+        $this->container['ship_zip_code'] = isset($data['ship_zip_code']) ? $data['ship_zip_code'] : null;
+        $this->container['ship_prefecture'] = isset($data['ship_prefecture']) ? $data['ship_prefecture'] : null;
+        $this->container['ship_city'] = isset($data['ship_city']) ? $data['ship_city'] : null;
+        $this->container['ship_address1'] = isset($data['ship_address1']) ? $data['ship_address1'] : null;
+        // $this->container['ship_address2'] = isset($data['ship_address2']) ? $data['ship_address2'] : null;
+        $this->container['ship_phone_number'] = isset($data['ship_phone_number']) ? $data['ship_phone_number'] : null;
     }
 
     /**
@@ -203,10 +198,6 @@ class Order implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (null === $this->container['order_id']) {
-            $invalidProperties[] = "'order_id' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -223,25 +214,20 @@ class Order implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets order_id.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getOrderId()
+    public function getShipFirstName()
     {
-        return $this->container['order_id'];
+        return $this->container['ship_first_name'];
     }
 
     /**
-     * Sets order_id.
-     *
-     * @param string $order_id an order identifier, in 3-7-7 format
-     *
+     * @param $ship_first_name
      * @return $this
      */
-    public function setOrderId($order_id)
+    public function setShipFirstName($ship_first_name)
     {
-        $this->container['order_id'] = $order_id;
+        $this->container['ship_first_name'] = $ship_first_name;
 
         return $this;
     }
@@ -249,18 +235,18 @@ class Order implements ModelInterface, ArrayAccess
     /**
      * @return mixed
      */
-    public function getVersion()
+    public function getShipLastName()
     {
-        return $this->container['version'];
+        return $this->container['ship_last_name'];
     }
 
     /**
-     * @param $version
+     * @param $ship_last_name
      * @return $this
      */
-    public function setVersion($version)
+    public function setShipLastName($ship_last_name)
     {
-        $this->container['version'] = $version;
+        $this->container['ship_last_name'] = $ship_last_name;
 
         return $this;
     }
@@ -268,18 +254,18 @@ class Order implements ModelInterface, ArrayAccess
     /**
      * @return mixed
      */
-    public function getOriginalOrderId()
+    public function getShipZipCode()
     {
-        return $this->container['original_order_id'];
+        return $this->container['ship_zip_code'];
     }
 
     /**
-     * @param $original_order_id
+     * @param $ship_zip_code
      * @return $this
      */
-    public function setOriginalOrderId($original_order_id)
+    public function setShipZipCode($ship_zip_code)
     {
-        $this->container['original_order_id'] = $original_order_id;
+        $this->container['ship_zip_code'] = $ship_zip_code;
 
         return $this;
     }
@@ -287,18 +273,18 @@ class Order implements ModelInterface, ArrayAccess
     /**
      * @return mixed
      */
-    public function getParentOrderId()
+    public function getShipPrefecture()
     {
-        return $this->container['parent_order_id'];
+        return $this->container['ship_prefecture'];
     }
 
     /**
-     * @param $parent_order_id
+     * @param $ship_prefecture
      * @return $this
      */
-    public function setParentOrderId($parent_order_id)
+    public function setShipPrefecture($ship_prefecture)
     {
-        $this->container['parent_order_id'] = $parent_order_id;
+        $this->container['ship_prefecture'] = $ship_prefecture;
 
         return $this;
     }
@@ -306,18 +292,18 @@ class Order implements ModelInterface, ArrayAccess
     /**
      * @return mixed
      */
-    public function getOrderTime()
+    public function getShipCity()
     {
-        return $this->container['order_time'];
+        return $this->container['ship_city'];
     }
 
     /**
-     * @param $order_time
+     * @param $ship_city
      * @return $this
      */
-    public function setOrderTime($order_time)
+    public function setShipCity($ship_city)
     {
-        $this->container['order_time'] = $order_time;
+        $this->container['ship_city'] = $ship_city;
 
         return $this;
     }
@@ -325,18 +311,18 @@ class Order implements ModelInterface, ArrayAccess
     /**
      * @return mixed
      */
-    public function getOrderStatus()
+    public function getShipAddress1()
     {
-        return $this->container['order_status'];
+        return $this->container['ship_address1'];
     }
 
     /**
-     * @param $order_status
+     * @param $ship_address1
      * @return $this
      */
-    public function setOrderStatus($order_status)
+    public function setShipAddress1($ship_address1)
     {
-        $this->container['order_status'] = $order_status;
+        $this->container['ship_address1'] = $ship_address1;
 
         return $this;
     }
@@ -344,18 +330,18 @@ class Order implements ModelInterface, ArrayAccess
     /**
      * @return mixed
      */
-    public function getPayStatus()
+    public function getShipAddress2()
     {
-        return $this->container['pay_status'];
+        return $this->container['ship_address2'];
     }
 
     /**
-     * @param $pay_status
+     * @param $ship_address2
      * @return $this
      */
-    public function setPayStatus($pay_status)
+    public function setShipAddress2($ship_address2)
     {
-        $this->container['pay_status'] = $pay_status;
+        $this->container['ship_address2'] = $ship_address2;
 
         return $this;
     }
@@ -363,56 +349,18 @@ class Order implements ModelInterface, ArrayAccess
     /**
      * @return mixed
      */
-    public function getSettleStatus()
+    public function getShipPhoneNumber()
     {
-        return $this->container['settle_status'];
+        return $this->container['ship_phone_number'];
     }
 
     /**
-     * @param $settle_status
+     * @param $ship_phone_number
      * @return $this
      */
-    public function setSettleStatus($settle_status)
+    public function setShipPhoneNumber($ship_phone_number)
     {
-        $this->container['settle_status'] = $settle_status;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPayType()
-    {
-        return $this->container['pay_type'];
-    }
-
-    /**
-     * @param $pay_type
-     * @return $this
-     */
-    public function setPayType($pay_type)
-    {
-        $this->container['pay_type'] = $pay_type;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTotalPrice()
-    {
-        return $this->container['total_price'];
-    }
-
-    /**
-     * @param $total_price
-     * @return $this
-     */
-    public function setTotalPrice($total_price)
-    {
-        $this->container['total_price'] = $total_price;
+        $this->container['ship_phone_number'] = $ship_phone_number;
 
         return $this;
     }

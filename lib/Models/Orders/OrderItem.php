@@ -4,16 +4,15 @@ namespace Goletter\YahooAPI\Models\Orders;
 use ArrayAccess;
 use Goletter\YahooAPI\Models\ModelInterface;
 use Goletter\YahooAPI\ObjectSerializer;
-
 /**
- * GetOrdersResponse Class Doc Comment.
+ * OrderItem Class Doc Comment.
  *
 
- * @description The response schema for the getOrders operation.
+ * @description A list of orders.
  *
- * @author   Stefan Neuhaus / Yahoo
+ * @author   Stefan Neuhaus / ClouSale
  */
-class GetOrdersResponse implements ModelInterface, ArrayAccess
+class OrderItem implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -22,7 +21,7 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      *
      * @var string
      */
-    protected static $swaggerModelName = 'GetOrdersResponse';
+    protected static $swaggerModelName = 'OrderItem';
 
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -30,8 +29,11 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerTypes = [
-        'payload' => '\Goletter\YahooAPI\Models\Orders\OrdersList',
-        'errors' => '\Goletter\YahooAPI\Models\Orders\ErrorList',
+        'item_id' => 'string',
+        'title' => 'string',
+        'sub_code' => 'string',
+        'unit_price' => 'string',
+        'quantity' => 'int',
     ];
 
     /**
@@ -40,8 +42,11 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $swaggerFormats = [
-        'payload' => null,
-        'errors' => null,
+        'item_id' => null,
+        'title' => null,
+        'sub_code' => null,
+        'unit_price' => null,
+        'quantity' => null,
     ];
 
     /**
@@ -71,8 +76,11 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'payload' => 'Search',
-        'errors' => 'errors',
+        'item_id' => 'ItemId',
+        'title' => 'Title',
+        'sub_code' => 'SubCode',
+        'unit_price' => 'UnitPrice',
+        'quantity' => 'Quantity',
     ];
 
     /**
@@ -81,8 +89,11 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'payload' => 'setPayload',
-        'errors' => 'setErrors',
+        'item_id' => 'setItemId',
+        'title' => 'setTitle',
+        'sub_code' => 'setSubCode',
+        'unit_price' => 'setUnitPrice',
+        'quantity' => 'setQuantity',
     ];
 
     /**
@@ -91,8 +102,11 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'payload' => 'getPayload',
-        'errors' => 'getErrors',
+        'item_id' => 'getItemId',
+        'title' => 'getTitle',
+        'sub_code' => 'getSubCode',
+        'unit_price' => 'getUnitPrice',
+        'quantity' => 'getQuantity',
     ];
 
     /**
@@ -105,7 +119,6 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     {
         return self::$attributeMap;
     }
-
 
     /**
      * Array of attributes to setter functions (for deserialization of responses).
@@ -152,8 +165,11 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['payload'] = isset($data['payload']) ? $data['payload'] : null;
-        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
+        $this->container['item_id'] = isset($data['item_id']) ? $data['item_id'] : null;
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        $this->container['sub_code'] = isset($data['sub_code']) ? $data['sub_code'] : null;
+        $this->container['unit_price'] = isset($data['unit_price']) ? $data['unit_price'] : null;
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
     }
 
     /**
@@ -180,49 +196,96 @@ class GetOrdersResponse implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets payload.
-     *
-     * @return \Goletter\YahooAPI\Models\Orders\OrdersList
+     * @return mixed
      */
-    public function getPayload()
+    public function getItemId()
     {
-        return $this->container['payload'];
+        return $this->container['item_id'];
     }
 
     /**
-     * Sets payload.
-     *
-     * @param \Goletter\YahooAPI\Models\Orders\OrdersList $payload payload
-     *
+     * @param $item_id
      * @return $this
      */
-    public function setPayload($payload)
+    public function setItemId($item_id)
     {
-        $this->container['payload'] = $payload;
+        $this->container['item_id'] = $item_id;
 
         return $this;
     }
 
     /**
-     * Gets errors.
-     *
-     * @return \Goletter\YahooAPI\Models\Orders\ErrorList
+     * @return mixed
      */
-    public function getErrors()
+    public function getTitle()
     {
-        return $this->container['errors'];
+        return $this->container['title'];
     }
 
     /**
-     * Sets errors.
-     *
-     * @param \Goletter\YahooAPI\Models\Orders\ErrorList $errors errors
-     *
+     * @param $title
      * @return $this
      */
-    public function setErrors($errors)
+    public function setTitle($title)
     {
-        $this->container['errors'] = $errors;
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubCode()
+    {
+        return $this->container['sub_code'];
+    }
+
+    /**
+     * @param $sub_code
+     * @return $this
+     */
+    public function setSubCode($sub_code)
+    {
+        $this->container['sub_code'] = $sub_code;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUnitPrice()
+    {
+        return $this->container['unit_price'];
+    }
+
+    /**
+     * @param $unit_price
+     * @return $this
+     */
+    public function setUnitPrice($unit_price)
+    {
+        $this->container['unit_price'] = $unit_price;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
+    {
+        return $this->container['quantity'];
+    }
+
+    /**
+     * @param $unit_price
+     * @return $this
+     */
+    public function setQuantity($unit_price)
+    {
+        $this->container['quantity'] = $unit_price;
 
         return $this;
     }

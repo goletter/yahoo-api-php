@@ -292,6 +292,7 @@ class ObjectSerializer
 
                 $propertyValue = $data->{$instance::attributeMap()[$property]};
                 if (isset($propertyValue)) {
+                    if (is_array($propertyValue)) $type .= 'List'; // 兼容当前值是对象/多维数组
                     $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
                 }
             }

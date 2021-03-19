@@ -3,6 +3,15 @@ namespace Goletter\YahooAPI;
 
 class Signature
 {
+    /**
+     * @param Configuration $config
+     * @param string $host
+     * @param string $method
+     * @param string $uri
+     * @param string $queryString
+     * @param array $data
+     * @return array
+     */
     public static function calculateSignature(
         Configuration $config,
         string $host,

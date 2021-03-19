@@ -1,6 +1,10 @@
 <?php
 namespace Goletter\YahooAPI;
 
+/**
+ * Class Configuration
+ * @package Goletter\YahooAPI
+ */
 class Configuration
 {
     private static $defaultConfiguration;
@@ -11,18 +15,6 @@ class Configuration
      * @var string
      */
     protected $accessToken = '';
-
-    /**
-     *
-     * @var string
-     */
-    protected $certPath = '';
-
-    /**
-     *
-     * @var string
-     */
-    protected $keyPath = '';
 
     /**
      * The host.
@@ -45,10 +37,15 @@ class Configuration
      */
     protected $debugFile = 'php://output';
 
+    /** @var string|null */
+    protected $certPath;
+    /** @var string|null */
+    protected $keyPath;
+    /** @var string|null */
+    protected $sellerId;
+
     /**
-     * Gets the default configuration instance.
-     *
-     * @return Configuration
+     * Constructor.
      */
     public static function getDefaultConfiguration()
     {
@@ -81,6 +78,25 @@ class Configuration
     public function getAccessToken()
     {
         return $this->accessToken;
+    }
+
+    /**
+     * @param $sellerId
+     * @return $this
+     */
+    public function setSellerId($sellerId)
+    {
+        $this->sellerId = $sellerId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSellerId()
+    {
+        return $this->sellerId;
     }
 
     /**

@@ -107,10 +107,10 @@ class OrdersApi
               <SellerId>$sellerId</SellerId>
               <Search>
                    <Condition>
-                        <!-- <ShipStatus>1</ShipStatus>
+                        <ShipStatus>1</ShipStatus>
                         <PayStatus>1</PayStatus>
                         <OrderStatus>2</OrderStatus>
-                        <IsSeen>true</IsSeen> -->
+                        <IsSeen>true</IsSeen>
                         <OrderTimeFrom>$orderTimeFrom</OrderTimeFrom>
                         <OrderTimeTo>$orderTimeTo</OrderTimeTo>
                    </Condition>

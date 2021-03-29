@@ -31,7 +31,7 @@ $config->setClientId('xxxx');
 $config->setClientSecret('xxxx');
 $config->setRedirectUri('http://www.xxx.com');
 $config->setAccessToken($accessToken);
-$config->setSellerId('nimaso');
+$config->setSellerId('xxxx');
 $config->setCertPath('/cart/nimaso.crt');
 $config->setKeyPath('/cart/nimaso.key');
 

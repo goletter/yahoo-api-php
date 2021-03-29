@@ -21,6 +21,7 @@ composer require goletter/yahoo-api-php
 For when you entered the in your developer profile:
 
 ```php
+
 <?php
 
 require_once './vendor/autoload.php';
@@ -40,4 +41,6 @@ $orderTimeTo = 20210317000000;
 $apiInstance = new \Goletter\YahooAPI\Api\OrdersApi($config);
 $result = $apiInstance->getOrders($orderTimeFrom, $orderTimeTo);
 $orders = $result->getPayload();
+print_r($orders);exit;
+
 ```

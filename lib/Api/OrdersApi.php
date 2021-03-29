@@ -110,7 +110,7 @@ class OrdersApi
                         <ShipStatus>1</ShipStatus>
                         <PayStatus>1</PayStatus>
                         <OrderStatus>2</OrderStatus>
-                        <IsSeen>true</IsSeen>
+                        <IsSeen>false</IsSeen>
                         <OrderTimeFrom>$orderTimeFrom</OrderTimeFrom>
                         <OrderTimeTo>$orderTimeTo</OrderTimeTo>
                    </Condition>
